@@ -18,9 +18,9 @@ func ExecutePipeline(jobs ...job) {
 		wg.Add(1)
 		out := make(chan interface{}, 1)
 		go func(job job, in, out chan interface{}, wg *sync.WaitGroup) {
+			defer wg.Done()
+			defer close(out)
 			job(in, out)
-			close(out)
-			wg.Done()
 		}(jobf, in, out, &wg)
 		in = out
 	}
@@ -52,7 +52,9 @@ func MultiHash(in, out chan interface{}) {
 	for val := range in {
 		wg.Add(1)
 		go func(val interface{}, wg *sync.WaitGroup) {
+			defer wg.Done()
 			res := make(chan orderData, 6)
+			defer close(res)
 			for th := 0; th <= 5; th++ {
 				go getCrc32WithOrder(fmt.Sprintf("%d%s", th, val), th, res)
 			}
@@ -62,7 +64,6 @@ func MultiHash(in, out chan interface{}) {
 				result[data.id] = data.data
 			}
 			out <- strings.Join(result[:], "")
-			wg.Done()
 		}(val, &wg)
 	}
 	wg.Wait()
