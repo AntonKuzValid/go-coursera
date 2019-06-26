@@ -89,7 +89,7 @@ func TestFindUsers(t *testing.T) {
 
 	for caseNum, tc := range testCases {
 		sc := &SearchClient{URL: ts.URL, AccessToken: tc.AccessToken}
-		response, err := sc.FindUsers(*tc.SearchRequest)
+		response, err := FindUsers(*tc.SearchRequest)
 		if tc.IsError {
 			if err == nil {
 				t.Errorf("[%d] error was expected", caseNum)
