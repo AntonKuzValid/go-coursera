@@ -1,13 +1,6 @@
 package main
 
-import (
-	"context"
-	"fmt"
-)
-
-type BizServerImpl struct {
-	Alc     map[string][]string
-	Storage []*Event
+/*type BizServerImpl struct {
 }
 
 func (bs *BizServerImpl) Check(context.Context, *Nothing) (*Nothing, error) {
@@ -23,4 +16,4 @@ func (bs *BizServerImpl) Add(context.Context, *Nothing) (*Nothing, error) {
 func (bs *BizServerImpl) Test(context.Context, *Nothing) (*Nothing, error) {
 	fmt.Println("Do test")
 	return &Nothing{}, nil
-}
+}*/

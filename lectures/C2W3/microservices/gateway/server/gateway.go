@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"go-coursera/lectures/C2W3/microservices/gateway/session"
 	"log"
 	"net"
 	"net/http"
@@ -9,9 +10,7 @@ import (
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
-
 	// "../session"
-	"coursera/microservices/gateway/session"
 )
 
 func main() {

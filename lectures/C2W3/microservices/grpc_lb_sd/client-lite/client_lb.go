@@ -4,6 +4,7 @@ import (
 	"context"
 	"flag"
 	"fmt"
+	"go-coursera/lectures/C2W3/microservices/grpc/session"
 	"log"
 	"strconv"
 	"time"
@@ -11,13 +12,11 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/naming"
 
-	"coursera/microservices/grpc/session"
-
 	consulapi "github.com/hashicorp/consul/api"
 )
 
 var (
-	consulAddr = flag.String("addr", "192.168.99.100:32769", "consul addr (8500 in original consul)")
+	consulAddr = flag.String("addr", "localhost:8500", "consul addr (8500 in original consul)")
 )
 
 var (

@@ -3,14 +3,13 @@ package main
 import (
 	"context"
 	"fmt"
+	"go-coursera/lectures/C2W3/microservices/grpc_stream/translit"
 	"io"
 	"log"
 	"sync"
 	"time"
 
 	"google.golang.org/grpc"
-
-	"coursera/microservices/grpc_stream/translit"
 )
 
 func main() {

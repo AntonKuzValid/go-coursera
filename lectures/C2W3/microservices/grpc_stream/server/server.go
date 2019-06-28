@@ -1,8 +1,8 @@
 package main
 
 import (
-	"coursera/microservices/grpc_stream/translit"
 	"fmt"
+	"go-coursera/lectures/C2W3/microservices/grpc_stream/translit"
 	"log"
 	"net"
 

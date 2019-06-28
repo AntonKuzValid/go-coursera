@@ -7,7 +7,7 @@ import (
 
 	"google.golang.org/grpc"
 
-	"coursera/microservices/grpc/session"
+	"go-coursera/lectures/C2W3/microservices/grpc/session"
 )
 
 func main() {

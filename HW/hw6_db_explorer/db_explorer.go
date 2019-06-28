@@ -23,7 +23,7 @@ func NewDbExplorer(db *sql.DB) (http.Handler, error) {
 	}
 	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		if r.URL.Path != "/" {
-			http.Error(w, `{"error": "unknown Table"}`, http.StatusNotFound)
+			http.Error(w, `{"error": "unknown table"}`, http.StatusNotFound)
 			return
 		}
 		switch r.Method {

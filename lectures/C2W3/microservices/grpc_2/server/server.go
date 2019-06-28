@@ -1,8 +1,8 @@
 package main
 
 import (
-	"coursera/microservices/grpc/session"
 	"fmt"
+	"go-coursera/lectures/C2W3/microservices/grpc/session"
 	"log"
 	"net"
 	"time"

@@ -117,7 +117,7 @@ func TestApis(t *testing.T) {
 			Path:   "/unknown_table",
 			Status: http.StatusNotFound,
 			Result: CR{
-				"error": "unknown Table",
+				"error": "unknown table",
 			},
 		},
 		Case{
