@@ -1,7 +1,14 @@
 package main
 
-/*type AdminServerImpl struct {
-	Streams *[] *Stream
+import (
+	"context"
+	"io"
+	"sync"
+	"time"
+)
+
+type AdminServerImpl struct {
+	Streams *[]*Stream
 	mu      *sync.RWMutex
 }
 
@@ -11,9 +18,12 @@ type Stream struct {
 }
 
 func (as *AdminServerImpl) Close() {
+	as.mu.Lock()
 	for _, stream := range *as.Streams {
 		close(stream.Channel)
 	}
+	as.Streams = nil
+	as.mu.Unlock()
 }
 
 func (as *AdminServerImpl) addStream(ctx context.Context) *Stream {
@@ -109,4 +119,4 @@ func countStatistic(evs []*Event) *Stat {
 		ByMethod:   byMethod,
 		ByConsumer: byConsumer,
 	}
-}*/
+}
