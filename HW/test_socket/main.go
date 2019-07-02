@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net"
-	"net/http"
 	"os"
 	_ "syscall"
 	"time"
@@ -49,37 +49,42 @@ import (
 //}
 
 func main() {
-
-	http.HandleFunc(":80", func(writer http.ResponseWriter, request *http.Request) {
-		writer.
-	})
 	newFile, _ := os.Create("new_file")
 	newFile.WriteString("hello")
 	newFile.Close()
 	file, _ := os.Open("new_file")
+	buff := make([]byte, 1024)
 	//src := int(file.Fd())
 	go func(file *os.File) {
-		listener, err := net.Listen("tcp", ":8000")
-		fmt.Println(err)
+		listener, err := net.Listen("tcp", ":8001")
+		if err != nil {
+			log.Fatal(err)
+		}
+		defer listener.Close()
 		conn, _ := listener.Accept()
 		defer conn.Close()
 		tcpListener := conn.(*net.TCPConn)
-		tcpListener.ReadFrom(file)
-		//f, _ := tcpListener.File()
-		//dst := int(f.Fd())
-		//var offset int64 = 0
-		//
-		//n, err := syscall.Sendfile(dst, src, &offset, 100)
-		//fmt.Println(err)
-		//fmt.Println(n)
+		//tcpListener.ReadFrom(file)
+		file.Read(buff)
+		tcpListener.Write(buff)
+		/*f, _ := tcpListener.File()
+		dst := int(f.Fd())
+		var offset int64 = 0
+
+		n, err := syscall.Sendfile(dst, src, &offset, 100)
+		fmt.Println(err)
+		fmt.Println(n)*/
 	}(file)
 
+	time.Sleep(2 * time.Second)
 	start := time.Now().UnixNano()
-	conn, err := net.Dial("tcp", ":8000")
-	if err == nil {
-		buff := make([]byte, 1)
-		conn.Read(buff)
-		fmt.Println(time.Now().UnixNano() - start)
-		fmt.Println(string(buff))
+	conn, err := net.Dial("tcp", ":8001")
+	if err != nil {
+		log.Fatal(err)
 	}
+	buff = make([]byte, 1)
+	conn.Read(buff)
+	fmt.Println(time.Now().UnixNano() - start)
+	fmt.Println(string(buff))
+
 }
