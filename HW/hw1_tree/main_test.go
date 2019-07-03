@@ -1,4 +1,4 @@
-package hw1_tree
+package main
 
 import (
 	"bytes"
